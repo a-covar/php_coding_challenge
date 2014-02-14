@@ -54,8 +54,7 @@ $morseCodes = array(
   array('char'=>"-", 'morse'=>"-....-"),
   array('char'=>"_", 'morse'=>"..--.-"),
   array('char'=>"\"",'morse'=>".-..-."),
-  array('char'=>"$", 'morse'=>"...-..-"),
-  array('char'=>"@", 'morse'=>".--.-.)")
+  array('char'=>"$", 'morse'=>"...-..-")
 );
 
 if ($argc < 2) throw new Exception('Gimme a sentence!');
@@ -73,23 +72,32 @@ $lookup[' '] = '/';
 
 foreach (str_split($sentence) as $char) {
     if (!isset($lookup[$char])) throw new Exception("No morse code translation found for '$char'");
-    $morse .= $lookup[$char];
+    $morse .= "$lookup[$char] ";
 }
 
 echo "$morse\n";
 
-foreach (str_split($morse) as $dotDash) {
-    switch ($dotDash) {
-        case '.':
-            $say = 'dot';
-            break;
-        case '-':
-            $say = 'dash';
-            break;
-        case '/':
-            $say = 'slash';
-            break;
-    }
+// foreach (str_split($morse) as $dotDash) {
+//     switch ($dotDash) {
+//         case '.':
+//             $say = 'dot';
+//             break;
+//         case '-':
+//             $say = 'dash';
+//             break;
+//         case '/':
+//             $say = 'slash';
+//             break;
+//     }
+//
+//     shell_exec("osascript -e 'say \"$say\" using \"Alex\"'");
+// }
 
-    shell_exec("osascript -e 'say \"$say\" using \"Alex\"'");
-}
+// asort($lookup);
+// print_r($lookup);
+
+// echo "    Morse | Alpha\n";
+// echo "--------- | ------\n";
+// foreach ($lookup as $char => $morse) {
+//     echo ' ' . sprintf('%-8s', "`$morse`") . " | $char \n";
+// }
